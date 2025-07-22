@@ -14,13 +14,20 @@ class _PasswordTexfieldState extends State<PasswordTexfield> {
     _hidePassword = !_hidePassword;
   });
 
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: _controller,
       obscureText: _hidePassword,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 28),
-        isDense: false,
         label: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),

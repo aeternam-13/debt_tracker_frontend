@@ -21,7 +21,6 @@ class LoginScreen extends ConsumerWidget {
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: [
                   Container(
                     padding: EdgeInsets.all(36),
@@ -33,7 +32,6 @@ class LoginScreen extends ConsumerWidget {
                           spreadRadius: 24,
                         ),
                       ],
-
                       border: Border.all(color: theme.colorScheme.primary),
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -56,7 +54,7 @@ class LoginScreen extends ConsumerWidget {
                               PasswordTexfield(),
                               ElevatedButton(
                                 onPressed: () {},
-                                style: smallPrimaryCustomButton(theme),
+                                style: primarySuperLargeButton(theme),
                                 child: Text("Login"),
                               ),
                             ],

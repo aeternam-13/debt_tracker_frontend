@@ -8,6 +8,10 @@ ButtonStyle primaryCustomButton(ThemeData theme) {
   );
 }
 
+ButtonStyle primarySuperLargeButton(ThemeData theme) => primaryCustomButton(
+  theme,
+).copyWith(minimumSize: WidgetStateProperty.all(const Size(300, 70)));
+
 ButtonStyle smallPrimaryCustomButton(ThemeData theme) {
   return ElevatedButton.styleFrom(
     minimumSize: Size(140, 40),
