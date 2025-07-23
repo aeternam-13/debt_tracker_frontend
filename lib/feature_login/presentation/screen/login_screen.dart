@@ -1,7 +1,7 @@
 import 'package:debttracker/commons/button_theme.dart';
 import 'package:debttracker/commons/safe_scope.dart';
-import 'package:debttracker/feature_login/login_screen/components/password_texfield.dart';
-import 'package:debttracker/feature_login/login_screen/components/username_textfield.dart';
+import 'package:debttracker/feature_login/presentation/screen/components/password_texfield.dart';
+import 'package:debttracker/feature_login/presentation/screen/components/username_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +12,7 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    //final viewmodel = ref.read(addEditNoteVMProvider.notifier);
 
     return SafeScope(
       child: Padding(

@@ -1,4 +1,4 @@
-import 'package:debttracker/feature_login/login_screen/login_screen.dart';
+import 'package:debttracker/feature_login/presentation/screen/login_screen.dart';
 import 'package:debttracker/feature_track_debt/debtor_list/debtor_list.dart';
 import 'package:debttracker/settings/di/providers.dart';
 import 'package:debttracker/settings/domain/model/theme_config.dart';
