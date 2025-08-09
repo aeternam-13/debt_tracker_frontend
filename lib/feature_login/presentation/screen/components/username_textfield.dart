@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 
-class UsernameTextfield extends StatefulWidget {
-  const UsernameTextfield({super.key});
-
-  @override
-  State<UsernameTextfield> createState() => _UsernameTextfieldState();
-}
-
-class _UsernameTextfieldState extends State<UsernameTextfield> {
-  final _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class UsernameTextfield extends StatelessWidget {
+  const UsernameTextfield({
+    super.key,
+    required this.controller,
+    required this.onValueChange,
+  });
+  final TextEditingController controller;
+  final ValueChanged<String> onValueChange;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return TextFormField(
-      controller: _controller,
+      controller: controller,
+      onChanged: onValueChange,
       decoration: InputDecoration(
         label: Container(
           decoration: BoxDecoration(

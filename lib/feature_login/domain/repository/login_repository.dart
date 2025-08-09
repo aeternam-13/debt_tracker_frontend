@@ -4,6 +4,6 @@ import 'package:debttracker/feature_login/domain/model/login_exception.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 abstract class LoginRepository {
-  Future<Result<AuthResponse, LoginException>> login(UserInfo userInfo);
+  Future<Result<Unit, LoginException>> login(UserInfo userInfo);
   Future<Result<Unit, LoginException>> register(UserInfo userInfo);
 }

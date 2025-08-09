@@ -1,18 +1,75 @@
 import 'package:debttracker/commons/button_theme.dart';
 import 'package:debttracker/commons/safe_scope.dart';
+import 'package:debttracker/feature_login/di/login_providers.dart';
+import 'package:debttracker/feature_login/presentation/login_intent.dart';
+import 'package:debttracker/feature_login/presentation/login_state_holder.dart';
+import 'package:debttracker/feature_login/presentation/login_ui_event.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/password_texfield.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/username_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    ref.listenManual(loginVMProvider, (previousState, newState) {
+      _updateController(_username, newState.username);
+      _updateController(_password, newState.password);
+    });
+  }
+
+  void _updateController(TextEditingController controller, String newValue) {
+    if (controller.text != newValue) {
+      controller.text = newValue;
+      controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: newValue.length),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _username.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  void _onUiEvent(BuildContext context, LoginUiEvent event) {
+    switch (event) {
+      case NavigateToMainScreen():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case DisplayLoadingDialog():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case HideLoadingDialog():
+        // TODO: Handle this case.
+        throw UnimplementedError();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     //final viewmodel = ref.read(addEditNoteVMProvider.notifier);
+    LoginStateHolder screenState = ref.watch(loginVMProvider);
+    final viewmodel = ref.read(loginVMProvider.notifier);
+
+    ref.listen<AsyncValue<LoginUiEvent>>(loginUiEventProvider, (prev, next) {
+      next.whenData((event) => _onUiEvent(context, event));
+    });
 
     return SafeScope(
       child: Padding(
@@ -51,10 +108,19 @@ class LoginScreen extends ConsumerWidget {
                           child: Column(
                             spacing: 36,
                             children: [
-                              UsernameTextfield(),
-                              PasswordTexfield(),
+                              UsernameTextfield(
+                                controller: _username,
+                                onValueChange: (String value) => viewmodel
+                                    .onIntent(EnteredUsernamIntent(value)),
+                              ),
+                              PasswordTexfield(
+                                controller: _password,
+                                onValueChange: (String value) => viewmodel
+                                    .onIntent(EnteredPasswordIntent(value)),
+                              ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () =>
+                                    viewmodel.onIntent(TryLoginIntent()),
                                 style: primarySuperLargeButton(theme),
                                 child: Text("Login"),
                               ),

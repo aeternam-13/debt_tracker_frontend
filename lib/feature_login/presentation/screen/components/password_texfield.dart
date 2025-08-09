@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PasswordTexfield extends StatefulWidget {
-  const PasswordTexfield({super.key});
-
+  const PasswordTexfield({
+    super.key,
+    required this.controller,
+    required this.onValueChange,
+  });
+  final TextEditingController controller;
+  final ValueChanged<String> onValueChange;
   @override
   State<PasswordTexfield> createState() => _PasswordTexfieldState();
 }
@@ -14,19 +19,12 @@ class _PasswordTexfieldState extends State<PasswordTexfield> {
     _hidePassword = !_hidePassword;
   });
 
-  final _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _controller,
+      controller: widget.controller,
       obscureText: _hidePassword,
+      onChanged: widget.onValueChange,
       decoration: InputDecoration(
         label: Container(
           decoration: BoxDecoration(

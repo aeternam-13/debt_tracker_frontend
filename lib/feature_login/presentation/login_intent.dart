@@ -1,9 +1,15 @@
-import 'package:debttracker/feature_login/domain/model/user_info.dart';
-
 sealed class LoginIntent {}
 
 class TryLoginIntent extends LoginIntent {
-  final UserInfo userInfo;
+  TryLoginIntent();
+}
 
-  TryLoginIntent({required this.userInfo});
+class EnteredUsernamIntent extends LoginIntent {
+  final String username;
+  EnteredUsernamIntent(this.username);
+}
+
+class EnteredPasswordIntent extends LoginIntent {
+  final String password;
+  EnteredPasswordIntent(this.password);
 }

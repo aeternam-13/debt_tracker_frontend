@@ -20,11 +20,22 @@ class LoginStateHolderMapper extends ClassMapperBase<LoginStateHolder> {
   @override
   final String id = 'LoginStateHolder';
 
+  static String _$username(LoginStateHolder v) => v.username;
+  static const Field<LoginStateHolder, String> _f$username =
+      Field('username', _$username, opt: true, def: "");
+  static String _$password(LoginStateHolder v) => v.password;
+  static const Field<LoginStateHolder, String> _f$password =
+      Field('password', _$password, opt: true, def: "");
+
   @override
-  final MappableFields<LoginStateHolder> fields = const {};
+  final MappableFields<LoginStateHolder> fields = const {
+    #username: _f$username,
+    #password: _f$password,
+  };
 
   static LoginStateHolder _instantiate(DecodingData data) {
-    return LoginStateHolder();
+    return LoginStateHolder(
+        username: data.dec(_f$username), password: data.dec(_f$password));
   }
 
   @override
@@ -82,7 +93,7 @@ extension LoginStateHolderValueCopy<$R, $Out>
 
 abstract class LoginStateHolderCopyWith<$R, $In extends LoginStateHolder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call();
+  $R call({String? username, String? password});
   LoginStateHolderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -96,9 +107,14 @@ class _LoginStateHolderCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LoginStateHolder> $mapper =
       LoginStateHolderMapper.ensureInitialized();
   @override
-  $R call() => $apply(FieldCopyWithData({}));
+  $R call({String? username, String? password}) => $apply(FieldCopyWithData({
+        if (username != null) #username: username,
+        if (password != null) #password: password
+      }));
   @override
-  LoginStateHolder $make(CopyWithData data) => LoginStateHolder();
+  LoginStateHolder $make(CopyWithData data) => LoginStateHolder(
+      username: data.get(#username, or: $value.username),
+      password: data.get(#password, or: $value.password));
 
   @override
   LoginStateHolderCopyWith<$R2, LoginStateHolder, $Out2> $chain<$R2, $Out2>(
