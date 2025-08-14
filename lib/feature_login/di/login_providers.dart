@@ -12,11 +12,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final loginRepProvider = Provider<LoginRepository>((ref) {
   final dao = ref.watch(loginDaoProvider);
-  final apiService = ref.watch(apiServiceProvider);
-  return LoginRepositoryImpl(dao, apiService);
+
+  return LoginRepositoryImpl(dao);
 });
 
-final loginDaoProvider = Provider<LoginDao>((ref) => LoginDaoImpl());
+final loginDaoProvider = Provider<LoginDao>((ref) {
+  final apiService = ref.watch(apiServiceProvider);
+  return LoginDaoImpl(apiService);
+});
 
 final loginUseCasesProvider = Provider<LoginUseCases>((ref) {
   final repository = ref.watch(loginRepProvider);

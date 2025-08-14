@@ -1,35 +1,28 @@
 import 'dart:io';
-
-import 'package:debttracker/commons/utils.dart';
+import 'package:debttracker/core/domain/services/api_service.dart';
 import 'package:debttracker/feature_login/data/data_source/login_dao.dart';
 import 'package:debttracker/feature_login/domain/model/auth_response.dart';
 import 'package:debttracker/feature_login/domain/model/login_exception.dart';
 import 'package:debttracker/feature_login/domain/model/user_info.dart';
-import 'package:http/http.dart' as http;
 import 'package:multiple_result/multiple_result.dart';
 
 class LoginDaoImpl extends LoginDao {
-  final String _baseUrl = "http://127.0.0.1:8080/api/login";
+  final String _baseUrl = "/login";
   final int _requestTimeout = 5;
+  final APIService _apiService;
+
+  LoginDaoImpl(this._apiService);
 
   @override
   Future<Result<AuthResponse, LoginException>> login(UserInfo userInfo) async {
     try {
-      final response = await http
-          .post(
-            Uri.parse(_baseUrl),
-            headers: buildHeaders(),
-            body: userInfo.toJson(),
-          )
-          .timeout(
-            Duration(seconds: _requestTimeout),
-            onTimeout: () => timeoutResponse(),
-          );
+      final response = await _apiService.post(_baseUrl, body: userInfo.toMap());
+
       switch (response.statusCode) {
         case HttpStatus.created:
-          final AuthResponse authResponse = AuthResponseMapper.fromJson(
-            response.body,
-          );
+          final authResponse = AuthResponseMapper.fromJson(response.body);
+
+          _apiService.setToken(authResponse.token);
 
           return Success(authResponse);
         default:

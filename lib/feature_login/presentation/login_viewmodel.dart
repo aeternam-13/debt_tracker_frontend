@@ -12,7 +12,9 @@ class LoginViewmodel extends StateNotifier<LoginStateHolder> {
   final _uiEventController = StreamController<LoginUiEvent>.broadcast();
   Stream<LoginUiEvent> get uiEventStream => _uiEventController.stream;
   LoginViewmodel(this._useCases) : super(LoginStateHolder());
+  bool _isLoading = false;
 
+  @override
   void onIntent(LoginIntent intent) {
     switch (intent) {
       case TryLoginIntent():
@@ -25,12 +27,19 @@ class LoginViewmodel extends StateNotifier<LoginStateHolder> {
   }
 
   Future<void> _loggin(UserInfo userInfo) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    _uiEventController.add(DisplayLoadingDialog());
+    await Future.delayed(Duration(seconds: 2));
     final res = await _useCases.login(userInfo);
+
     res.map(
-      successMapper: (_) {
-        //TODO ui event to navite into new screen
+      successMapper: (_) {},
+      errorMapper: (exception) {
+        _uiEventController.add(ShowErrorDialog(exception.message));
       },
-      errorMapper: (exception) {},
     );
+    _uiEventController.add(NavigateBack());
+    _isLoading = false;
   }
 }

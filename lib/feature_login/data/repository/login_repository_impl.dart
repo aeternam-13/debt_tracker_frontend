@@ -8,16 +8,15 @@ import 'package:multiple_result/multiple_result.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
   final LoginDao _dao;
-  final APIService _apiService;
 
-  LoginRepositoryImpl(this._dao, this._apiService);
+  LoginRepositoryImpl(this._dao);
 
   @override
   Future<Result<Unit, LoginException>> login(UserInfo userInfo) async {
     final res = await _dao.login(userInfo);
     return res.map(
       successMapper: (authResponse) {
-        _apiService.setToken(authResponse.token);
+        //_apiService.setToken(authResponse.token);
         return unit;
       },
       errorMapper: (error) => error,

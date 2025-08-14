@@ -1,5 +1,7 @@
 import 'package:debttracker/commons/button_theme.dart';
+import 'package:debttracker/commons/dialogs.dart';
 import 'package:debttracker/commons/safe_scope.dart';
+import 'package:debttracker/commons/snack_bars.dart';
 import 'package:debttracker/feature_login/di/login_providers.dart';
 import 'package:debttracker/feature_login/presentation/login_intent.dart';
 import 'package:debttracker/feature_login/presentation/login_state_holder.dart';
@@ -49,14 +51,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void _onUiEvent(BuildContext context, LoginUiEvent event) {
     switch (event) {
       case NavigateToMainScreen():
-        // TODO: Handle this case.
         throw UnimplementedError();
       case DisplayLoadingDialog():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        loadingDialog(context, "loading");
       case HideLoadingDialog():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        Navigator.of(context).pop();
+      case NavigateBack():
+        Navigator.of(context).pop();
+      case ShowErrorDialog():
+        errorSnackBar(context, event.text);
     }
   }
 
