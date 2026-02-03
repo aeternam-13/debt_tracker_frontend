@@ -1,9 +1,8 @@
 import 'package:debttracker/feature_login/presentation/screen/login_screen.dart';
 import 'package:debttracker/feature_track_debt/debtor_list/debtor_list.dart';
-import 'package:debttracker/settings/di/providers.dart';
 import 'package:debttracker/settings/domain/model/theme_config.dart';
-import 'package:debttracker/settings/presentation/settings_state_holder.dart';
 import 'package:debttracker/settings/presentation/settings_screen.dart';
+import 'package:debttracker/settings/presentation/settings_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +16,8 @@ class DebtTracker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SettingsStateHolder settings = ref.watch(settingsVMProvider);
+    final settings = ref.watch(settingsViewmodelProvider);
+
     ThemeConfig themeConfig = settings.themeConfig;
 
     return MaterialApp.router(

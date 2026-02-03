@@ -4,8 +4,8 @@ import 'package:debttracker/commons/safe_scope.dart';
 import 'package:debttracker/commons/snack_bars.dart';
 import 'package:debttracker/feature_login/di/login_providers.dart';
 import 'package:debttracker/feature_login/presentation/login_intent.dart';
-import 'package:debttracker/feature_login/presentation/login_state_holder.dart';
 import 'package:debttracker/feature_login/presentation/login_ui_event.dart';
+import 'package:debttracker/feature_login/presentation/login_viewmodel.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/password_texfield.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/username_textfield.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    ref.listenManual(loginVMProvider, (previousState, newState) {
+    ref.listenManual(loginViewmodelProvider, (previousState, newState) {
       _updateController(_username, newState.username);
       _updateController(_password, newState.password);
     });
@@ -48,31 +48,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  void _onUiEvent(BuildContext context, LoginUiEvent event) {
-    switch (event) {
-      case NavigateToMainScreen():
-        throw UnimplementedError();
-      case DisplayLoadingDialog():
-        loadingDialog(context, "loading");
-      case HideLoadingDialog():
-        Navigator.of(context).pop();
-      case NavigateBack():
-        Navigator.of(context).pop();
-      case ShowErrorDialog():
-        errorSnackBar(context, event.text);
-    }
-  }
+  void _listenEvents(BuildContext context) =>
+      ref.listen<AsyncValue<LoginUiEvent>>(loginUiEventProvider, (prev, next) {
+        next.whenData((event) {
+          switch (event) {
+            case NavigateToMainScreen():
+              throw UnimplementedError();
+            case DisplayLoadingDialog():
+              loadingDialog(context, "loading");
+            case HideLoadingDialog() || NavigateBack():
+              Navigator.of(context).pop();
+            case ShowErrorDialog():
+              errorSnackBar(context, event.text);
+          }
+        });
+      });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    //final viewmodel = ref.read(addEditNoteVMProvider.notifier);
-    LoginStateHolder screenState = ref.watch(loginVMProvider);
-    final viewmodel = ref.read(loginVMProvider.notifier);
 
-    ref.listen<AsyncValue<LoginUiEvent>>(loginUiEventProvider, (prev, next) {
-      next.whenData((event) => _onUiEvent(context, event));
-    });
+    final state = ref.watch(loginViewmodelProvider);
+    final viewmodel = ref.read(loginViewmodelProvider.notifier);
+
+    _listenEvents(context);
 
     return SafeScope(
       child: Padding(
@@ -81,7 +80,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           children: [
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: .center,
                 children: [
                   Container(
                     padding: EdgeInsets.all(36),

@@ -1,9 +1,8 @@
 import 'package:debttracker/commons/button_theme.dart';
 import 'package:debttracker/commons/safe_scope.dart';
-import 'package:debttracker/settings/di/providers.dart';
 import 'package:debttracker/settings/domain/model/custom_theme_mode.dart';
 import 'package:debttracker/settings/presentation/settings_intent.dart';
-import 'package:debttracker/settings/presentation/settings_state_holder.dart';
+import 'package:debttracker/settings/presentation/settings_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,8 +12,9 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SettingsStateHolder state = ref.watch(settingsVMProvider);
-    final viewModel = ref.read(settingsVMProvider.notifier);
+    final state = ref.watch(settingsViewmodelProvider);
+    final viewmodel = ref.read(settingsViewmodelProvider.notifier);
+
     final theme = Theme.of(context);
     return SafeScope(
       appBar: AppBar(
@@ -33,7 +33,7 @@ class SettingsScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ThemeButton(
-                callback: () => viewModel.onIntent(
+                callback: () => viewmodel.onIntent(
                   ChangeThemeSettingsIntent(
                     themeMode: CustomThemeMode.forceDark,
                   ),
@@ -44,7 +44,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
 
               ThemeButton(
-                callback: () => viewModel.onIntent(
+                callback: () => viewmodel.onIntent(
                   ChangeThemeSettingsIntent(
                     themeMode: CustomThemeMode.forceLight,
                   ),
@@ -55,7 +55,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
 
               ThemeButton(
-                callback: () => viewModel.onIntent(
+                callback: () => viewmodel.onIntent(
                   ChangeThemeSettingsIntent(themeMode: CustomThemeMode.app),
                 ),
                 icon: Icons.no_accounts,

@@ -5,7 +5,6 @@ import 'package:debttracker/feature_login/data/repository/login_repository_impl.
 import 'package:debttracker/feature_login/domain/repository/login_repository.dart';
 import 'package:debttracker/feature_login/domain/use_case/login.dart';
 import 'package:debttracker/feature_login/domain/use_case/login_use_cases.dart';
-import 'package:debttracker/feature_login/presentation/login_state_holder.dart';
 import 'package:debttracker/feature_login/presentation/login_ui_event.dart';
 import 'package:debttracker/feature_login/presentation/login_viewmodel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,13 +26,6 @@ final loginUseCasesProvider = Provider<LoginUseCases>((ref) {
   return LoginUseCases(repository, login: Login(repository));
 });
 
-final loginVMProvider = StateNotifierProvider<LoginViewmodel, LoginStateHolder>(
-  (ref) {
-    final loginUseCases = ref.read(loginUseCasesProvider);
-    return LoginViewmodel(loginUseCases);
-  },
-);
-
 final loginUiEventProvider = StreamProvider<LoginUiEvent>(
-  (ref) => ref.watch(loginVMProvider.notifier).uiEventStream,
+  (ref) => ref.watch(loginViewmodelProvider.notifier).uiEventStream,
 );

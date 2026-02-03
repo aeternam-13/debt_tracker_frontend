@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
@@ -21,8 +22,12 @@ class SettingsStateHolderMapper extends ClassMapperBase<SettingsStateHolder> {
   final String id = 'SettingsStateHolder';
 
   static CustomThemeMode _$themeMode(SettingsStateHolder v) => v.themeMode;
-  static const Field<SettingsStateHolder, CustomThemeMode> _f$themeMode =
-      Field('themeMode', _$themeMode);
+  static const Field<SettingsStateHolder, CustomThemeMode> _f$themeMode = Field(
+    'themeMode',
+    _$themeMode,
+    opt: true,
+    def: CustomThemeMode.app,
+  );
 
   @override
   final MappableFields<SettingsStateHolder> fields = const {
@@ -56,41 +61,57 @@ mixin SettingsStateHolderMappable {
         .encodeMap<SettingsStateHolder>(this as SettingsStateHolder);
   }
 
-  SettingsStateHolderCopyWith<SettingsStateHolder, SettingsStateHolder,
-      SettingsStateHolder> get copyWith => _SettingsStateHolderCopyWithImpl<
-          SettingsStateHolder, SettingsStateHolder>(
-      this as SettingsStateHolder, $identity, $identity);
+  SettingsStateHolderCopyWith<
+    SettingsStateHolder,
+    SettingsStateHolder,
+    SettingsStateHolder
+  >
+  get copyWith =>
+      _SettingsStateHolderCopyWithImpl<
+        SettingsStateHolder,
+        SettingsStateHolder
+      >(this as SettingsStateHolder, $identity, $identity);
   @override
   String toString() {
-    return SettingsStateHolderMapper.ensureInitialized()
-        .stringifyValue(this as SettingsStateHolder);
+    return SettingsStateHolderMapper.ensureInitialized().stringifyValue(
+      this as SettingsStateHolder,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return SettingsStateHolderMapper.ensureInitialized()
-        .equalsValue(this as SettingsStateHolder, other);
+    return SettingsStateHolderMapper.ensureInitialized().equalsValue(
+      this as SettingsStateHolder,
+      other,
+    );
   }
 
   @override
   int get hashCode {
-    return SettingsStateHolderMapper.ensureInitialized()
-        .hashValue(this as SettingsStateHolder);
+    return SettingsStateHolderMapper.ensureInitialized().hashValue(
+      this as SettingsStateHolder,
+    );
   }
 }
 
 extension SettingsStateHolderValueCopy<$R, $Out>
     on ObjectCopyWith<$R, SettingsStateHolder, $Out> {
   SettingsStateHolderCopyWith<$R, SettingsStateHolder, $Out>
-      get $asSettingsStateHolder => $base.as(
-          (v, t, t2) => _SettingsStateHolderCopyWithImpl<$R, $Out>(v, t, t2));
+  get $asSettingsStateHolder => $base.as(
+    (v, t, t2) => _SettingsStateHolderCopyWithImpl<$R, $Out>(v, t, t2),
+  );
 }
 
-abstract class SettingsStateHolderCopyWith<$R, $In extends SettingsStateHolder,
-    $Out> implements ClassCopyWith<$R, $In, $Out> {
+abstract class SettingsStateHolderCopyWith<
+  $R,
+  $In extends SettingsStateHolder,
+  $Out
+>
+    implements ClassCopyWith<$R, $In, $Out> {
   $R call({CustomThemeMode? themeMode});
   SettingsStateHolderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
+    Then<$Out2, $R2> t,
+  );
 }
 
 class _SettingsStateHolderCopyWithImpl<$R, $Out>
@@ -106,10 +127,12 @@ class _SettingsStateHolderCopyWithImpl<$R, $Out>
       $apply(FieldCopyWithData({if (themeMode != null) #themeMode: themeMode}));
   @override
   SettingsStateHolder $make(CopyWithData data) => SettingsStateHolder(
-      themeMode: data.get(#themeMode, or: $value.themeMode));
+    themeMode: data.get(#themeMode, or: $value.themeMode),
+  );
 
   @override
   SettingsStateHolderCopyWith<$R2, SettingsStateHolder, $Out2>
-      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-          _SettingsStateHolderCopyWithImpl<$R2, $Out2>($value, $cast, t);
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _SettingsStateHolderCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
+

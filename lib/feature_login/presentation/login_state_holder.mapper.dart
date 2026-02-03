@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
@@ -21,11 +22,19 @@ class LoginStateHolderMapper extends ClassMapperBase<LoginStateHolder> {
   final String id = 'LoginStateHolder';
 
   static String _$username(LoginStateHolder v) => v.username;
-  static const Field<LoginStateHolder, String> _f$username =
-      Field('username', _$username, opt: true, def: "");
+  static const Field<LoginStateHolder, String> _f$username = Field(
+    'username',
+    _$username,
+    opt: true,
+    def: "",
+  );
   static String _$password(LoginStateHolder v) => v.password;
-  static const Field<LoginStateHolder, String> _f$password =
-      Field('password', _$password, opt: true, def: "");
+  static const Field<LoginStateHolder, String> _f$password = Field(
+    'password',
+    _$password,
+    opt: true,
+    def: "",
+  );
 
   @override
   final MappableFields<LoginStateHolder> fields = const {
@@ -35,7 +44,9 @@ class LoginStateHolderMapper extends ClassMapperBase<LoginStateHolder> {
 
   static LoginStateHolder _instantiate(DecodingData data) {
     return LoginStateHolder(
-        username: data.dec(_f$username), password: data.dec(_f$password));
+      username: data.dec(_f$username),
+      password: data.dec(_f$password),
+    );
   }
 
   @override
@@ -62,40 +73,48 @@ mixin LoginStateHolderMappable {
   }
 
   LoginStateHolderCopyWith<LoginStateHolder, LoginStateHolder, LoginStateHolder>
-      get copyWith =>
-          _LoginStateHolderCopyWithImpl<LoginStateHolder, LoginStateHolder>(
-              this as LoginStateHolder, $identity, $identity);
+  get copyWith =>
+      _LoginStateHolderCopyWithImpl<LoginStateHolder, LoginStateHolder>(
+        this as LoginStateHolder,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
-    return LoginStateHolderMapper.ensureInitialized()
-        .stringifyValue(this as LoginStateHolder);
+    return LoginStateHolderMapper.ensureInitialized().stringifyValue(
+      this as LoginStateHolder,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return LoginStateHolderMapper.ensureInitialized()
-        .equalsValue(this as LoginStateHolder, other);
+    return LoginStateHolderMapper.ensureInitialized().equalsValue(
+      this as LoginStateHolder,
+      other,
+    );
   }
 
   @override
   int get hashCode {
-    return LoginStateHolderMapper.ensureInitialized()
-        .hashValue(this as LoginStateHolder);
+    return LoginStateHolderMapper.ensureInitialized().hashValue(
+      this as LoginStateHolder,
+    );
   }
 }
 
 extension LoginStateHolderValueCopy<$R, $Out>
     on ObjectCopyWith<$R, LoginStateHolder, $Out> {
   LoginStateHolderCopyWith<$R, LoginStateHolder, $Out>
-      get $asLoginStateHolder => $base
-          .as((v, t, t2) => _LoginStateHolderCopyWithImpl<$R, $Out>(v, t, t2));
+  get $asLoginStateHolder =>
+      $base.as((v, t, t2) => _LoginStateHolderCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class LoginStateHolderCopyWith<$R, $In extends LoginStateHolder, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call({String? username, String? password});
   LoginStateHolderCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
+    Then<$Out2, $R2> t,
+  );
 }
 
 class _LoginStateHolderCopyWithImpl<$R, $Out>
@@ -107,17 +126,21 @@ class _LoginStateHolderCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LoginStateHolder> $mapper =
       LoginStateHolderMapper.ensureInitialized();
   @override
-  $R call({String? username, String? password}) => $apply(FieldCopyWithData({
-        if (username != null) #username: username,
-        if (password != null) #password: password
-      }));
+  $R call({String? username, String? password}) => $apply(
+    FieldCopyWithData({
+      if (username != null) #username: username,
+      if (password != null) #password: password,
+    }),
+  );
   @override
   LoginStateHolder $make(CopyWithData data) => LoginStateHolder(
-      username: data.get(#username, or: $value.username),
-      password: data.get(#password, or: $value.password));
+    username: data.get(#username, or: $value.username),
+    password: data.get(#password, or: $value.password),
+  );
 
   @override
   LoginStateHolderCopyWith<$R2, LoginStateHolder, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _LoginStateHolderCopyWithImpl<$R2, $Out2>($value, $cast, t);
+    Then<$Out2, $R2> t,
+  ) => _LoginStateHolderCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
+

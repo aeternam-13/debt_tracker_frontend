@@ -1,20 +1,31 @@
 import 'dart:async';
 
+import 'package:debttracker/feature_login/di/login_providers.dart';
 import 'package:debttracker/feature_login/domain/model/user_info.dart';
 import 'package:debttracker/feature_login/domain/use_case/login_use_cases.dart';
 import 'package:debttracker/feature_login/presentation/login_intent.dart';
 import 'package:debttracker/feature_login/presentation/login_state_holder.dart';
 import 'package:debttracker/feature_login/presentation/login_ui_event.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class LoginViewmodel extends StateNotifier<LoginStateHolder> {
-  final LoginUseCases _useCases;
+part 'login_viewmodel.g.dart';
+
+@riverpod
+class LoginViewmodel extends _$LoginViewmodel {
+  late final LoginUseCases _useCases;
+
   final _uiEventController = StreamController<LoginUiEvent>.broadcast();
+
   Stream<LoginUiEvent> get uiEventStream => _uiEventController.stream;
-  LoginViewmodel(this._useCases) : super(LoginStateHolder());
-  bool _isLoading = false;
 
   @override
+  LoginStateHolder build() {
+    _useCases = ref.read(loginUseCasesProvider);
+    return LoginStateHolder();
+  }
+
+  bool _isLoading = false;
+
   void onIntent(LoginIntent intent) {
     switch (intent) {
       case TryLoginIntent():

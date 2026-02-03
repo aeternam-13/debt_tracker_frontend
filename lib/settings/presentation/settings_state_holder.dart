@@ -12,7 +12,7 @@ part 'settings_state_holder.mapper.dart';
 class SettingsStateHolder with SettingsStateHolderMappable {
   final CustomThemeMode themeMode;
 
-  SettingsStateHolder({required this.themeMode});
+  SettingsStateHolder({this.themeMode = CustomThemeMode.app});
 
   final _appTheme = DebtTrackerMainTheme(ThemeData().textTheme);
 

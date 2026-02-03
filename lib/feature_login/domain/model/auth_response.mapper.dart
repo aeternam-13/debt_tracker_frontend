@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
@@ -23,8 +24,10 @@ class AuthResponseMapper extends ClassMapperBase<AuthResponse> {
   static String _$token(AuthResponse v) => v.token;
   static const Field<AuthResponse, String> _f$token = Field('token', _$token);
   static String _$refreshToken(AuthResponse v) => v.refreshToken;
-  static const Field<AuthResponse, String> _f$refreshToken =
-      Field('refreshToken', _$refreshToken);
+  static const Field<AuthResponse, String> _f$refreshToken = Field(
+    'refreshToken',
+    _$refreshToken,
+  );
 
   @override
   final MappableFields<AuthResponse> fields = const {
@@ -34,7 +37,9 @@ class AuthResponseMapper extends ClassMapperBase<AuthResponse> {
 
   static AuthResponse _instantiate(DecodingData data) {
     return AuthResponse(
-        token: data.dec(_f$token), refreshToken: data.dec(_f$refreshToken));
+      token: data.dec(_f$token),
+      refreshToken: data.dec(_f$refreshToken),
+    );
   }
 
   @override
@@ -51,34 +56,43 @@ class AuthResponseMapper extends ClassMapperBase<AuthResponse> {
 
 mixin AuthResponseMappable {
   String toJson() {
-    return AuthResponseMapper.ensureInitialized()
-        .encodeJson<AuthResponse>(this as AuthResponse);
+    return AuthResponseMapper.ensureInitialized().encodeJson<AuthResponse>(
+      this as AuthResponse,
+    );
   }
 
   Map<String, dynamic> toMap() {
-    return AuthResponseMapper.ensureInitialized()
-        .encodeMap<AuthResponse>(this as AuthResponse);
+    return AuthResponseMapper.ensureInitialized().encodeMap<AuthResponse>(
+      this as AuthResponse,
+    );
   }
 
   AuthResponseCopyWith<AuthResponse, AuthResponse, AuthResponse> get copyWith =>
       _AuthResponseCopyWithImpl<AuthResponse, AuthResponse>(
-          this as AuthResponse, $identity, $identity);
+        this as AuthResponse,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
-    return AuthResponseMapper.ensureInitialized()
-        .stringifyValue(this as AuthResponse);
+    return AuthResponseMapper.ensureInitialized().stringifyValue(
+      this as AuthResponse,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return AuthResponseMapper.ensureInitialized()
-        .equalsValue(this as AuthResponse, other);
+    return AuthResponseMapper.ensureInitialized().equalsValue(
+      this as AuthResponse,
+      other,
+    );
   }
 
   @override
   int get hashCode {
-    return AuthResponseMapper.ensureInitialized()
-        .hashValue(this as AuthResponse);
+    return AuthResponseMapper.ensureInitialized().hashValue(
+      this as AuthResponse,
+    );
   }
 }
 
@@ -103,17 +117,21 @@ class _AuthResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<AuthResponse> $mapper =
       AuthResponseMapper.ensureInitialized();
   @override
-  $R call({String? token, String? refreshToken}) => $apply(FieldCopyWithData({
-        if (token != null) #token: token,
-        if (refreshToken != null) #refreshToken: refreshToken
-      }));
+  $R call({String? token, String? refreshToken}) => $apply(
+    FieldCopyWithData({
+      if (token != null) #token: token,
+      if (refreshToken != null) #refreshToken: refreshToken,
+    }),
+  );
   @override
   AuthResponse $make(CopyWithData data) => AuthResponse(
-      token: data.get(#token, or: $value.token),
-      refreshToken: data.get(#refreshToken, or: $value.refreshToken));
+    token: data.get(#token, or: $value.token),
+    refreshToken: data.get(#refreshToken, or: $value.refreshToken),
+  );
 
   @override
   AuthResponseCopyWith<$R2, AuthResponse, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _AuthResponseCopyWithImpl<$R2, $Out2>($value, $cast, t);
+    Then<$Out2, $R2> t,
+  ) => _AuthResponseCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
+
