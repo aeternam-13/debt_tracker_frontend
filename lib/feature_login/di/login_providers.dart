@@ -7,25 +7,23 @@ import 'package:debttracker/feature_login/domain/use_case/login.dart';
 import 'package:debttracker/feature_login/domain/use_case/login_use_cases.dart';
 import 'package:debttracker/feature_login/presentation/login_ui_event.dart';
 import 'package:debttracker/feature_login/presentation/login_viewmodel.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final loginRepProvider = Provider<LoginRepository>((ref) {
-  final dao = ref.watch(loginDaoProvider);
+part 'login_providers.g.dart';
 
-  return LoginRepositoryImpl(dao);
-});
+@riverpod
+Stream<LoginUiEvent> loginUiEvent(Ref ref) =>
+    ref.watch(loginViewmodelProvider.notifier).uiEventStream;
 
-final loginDaoProvider = Provider<LoginDao>((ref) {
-  final apiService = ref.watch(apiServiceProvider);
-  return LoginDaoImpl(apiService);
-});
+@Riverpod(keepAlive: true)
+LoginDao loginDao(Ref ref) => LoginDaoImpl(ref.watch(apiServiceProvider));
 
-final loginUseCasesProvider = Provider<LoginUseCases>((ref) {
-  final repository = ref.watch(loginRepProvider);
+@Riverpod(keepAlive: true)
+LoginRepository loginRepository(Ref ref) =>
+    LoginRepositoryImpl(ref.watch(loginDaoProvider));
 
-  return LoginUseCases(repository, login: Login(repository));
-});
-
-final loginUiEventProvider = StreamProvider<LoginUiEvent>(
-  (ref) => ref.watch(loginViewmodelProvider.notifier).uiEventStream,
-);
+@Riverpod(keepAlive: true)
+LoginUseCases loginUseCases(Ref ref) {
+  LoginRepository repository = ref.watch(loginRepositoryProvider);
+  return LoginUseCases(login: Login(repository));
+}

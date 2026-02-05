@@ -17,7 +17,6 @@ class SettingsStateHolder with SettingsStateHolderMappable {
   final _appTheme = DebtTrackerMainTheme(ThemeData().textTheme);
 
   ThemeConfig get themeConfig {
-    log("me llamooo");
     switch (themeMode) {
       case CustomThemeMode.app:
         return ThemeConfig(
