@@ -21,6 +21,7 @@ class LoginViewmodel extends _$LoginViewmodel {
   @override
   LoginStateHolder build() {
     _useCases = ref.read(loginUseCasesProvider);
+    ref.onDispose(() => _uiEventController.close());
     return LoginStateHolder();
   }
 
