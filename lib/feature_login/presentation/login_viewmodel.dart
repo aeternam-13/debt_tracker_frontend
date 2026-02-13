@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:debttracker/feature_login/di/login_providers.dart';
 import 'package:debttracker/feature_login/domain/model/user_info.dart';
@@ -22,7 +23,10 @@ class LoginViewmodel extends _$LoginViewmodel {
   LoginStateHolder build() {
     _useCases = ref.read(loginUseCasesProvider);
     ref.onDispose(() => _uiEventController.close());
-    return LoginStateHolder();
+    return LoginStateHolder(
+      username: "ae@aeternam.com",
+      password: "password123",
+    );
   }
 
   bool _isLoading = false;
@@ -32,6 +36,7 @@ class LoginViewmodel extends _$LoginViewmodel {
       case TryLoginIntent():
         _loggin(UserInfo(email: state.username, password: state.password));
       case EnteredUsernamIntent():
+        log(intent.username);
         state = state.copyWith(username: intent.username);
       case EnteredPasswordIntent():
         state = state.copyWith(password: intent.password);
@@ -46,7 +51,9 @@ class LoginViewmodel extends _$LoginViewmodel {
     final res = await _useCases.login(userInfo);
 
     res.map(
-      successMapper: (_) {},
+      successMapper: (_) {
+        _uiEventController.add(NavigateToMainScreen());
+      },
       errorMapper: (exception) {
         _uiEventController.add(ShowErrorDialog(exception.message));
       },

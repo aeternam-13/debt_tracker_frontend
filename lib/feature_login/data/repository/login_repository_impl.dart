@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:debttracker/feature_login/data/data_source/login_dao.dart';
 import 'package:debttracker/feature_login/domain/model/user_info.dart';
 import 'package:debttracker/feature_login/domain/model/login_exception.dart';
@@ -12,6 +14,7 @@ class LoginRepositoryImpl implements LoginRepository {
   @override
   Future<Result<Unit, LoginException>> login(UserInfo userInfo) async {
     final res = await _dao.login(userInfo);
+    log(userInfo.toString());
     return res.map(
       successMapper: (authResponse) {
         //_apiService.setToken(authResponse.token);

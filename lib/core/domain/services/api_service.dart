@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class APIService {
   String _token = "";
-  final String _baseUrl = 'http://127.0.0.1:8080';
+  final String _baseUrl = 'http://127.0.0.1:8080/api';
   final http.Client _client = http.Client();
 
   void setToken(String token) {

@@ -23,23 +23,12 @@ class AuthResponseMapper extends ClassMapperBase<AuthResponse> {
 
   static String _$token(AuthResponse v) => v.token;
   static const Field<AuthResponse, String> _f$token = Field('token', _$token);
-  static String _$refreshToken(AuthResponse v) => v.refreshToken;
-  static const Field<AuthResponse, String> _f$refreshToken = Field(
-    'refreshToken',
-    _$refreshToken,
-  );
 
   @override
-  final MappableFields<AuthResponse> fields = const {
-    #token: _f$token,
-    #refreshToken: _f$refreshToken,
-  };
+  final MappableFields<AuthResponse> fields = const {#token: _f$token};
 
   static AuthResponse _instantiate(DecodingData data) {
-    return AuthResponse(
-      token: data.dec(_f$token),
-      refreshToken: data.dec(_f$refreshToken),
-    );
+    return AuthResponse(token: data.dec(_f$token));
   }
 
   @override
@@ -104,7 +93,7 @@ extension AuthResponseValueCopy<$R, $Out>
 
 abstract class AuthResponseCopyWith<$R, $In extends AuthResponse, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? token, String? refreshToken});
+  $R call({String? token});
   AuthResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -117,17 +106,11 @@ class _AuthResponseCopyWithImpl<$R, $Out>
   late final ClassMapperBase<AuthResponse> $mapper =
       AuthResponseMapper.ensureInitialized();
   @override
-  $R call({String? token, String? refreshToken}) => $apply(
-    FieldCopyWithData({
-      if (token != null) #token: token,
-      if (refreshToken != null) #refreshToken: refreshToken,
-    }),
-  );
+  $R call({String? token}) =>
+      $apply(FieldCopyWithData({if (token != null) #token: token}));
   @override
-  AuthResponse $make(CopyWithData data) => AuthResponse(
-    token: data.get(#token, or: $value.token),
-    refreshToken: data.get(#refreshToken, or: $value.refreshToken),
-  );
+  AuthResponse $make(CopyWithData data) =>
+      AuthResponse(token: data.get(#token, or: $value.token));
 
   @override
   AuthResponseCopyWith<$R2, AuthResponse, $Out2> $chain<$R2, $Out2>(

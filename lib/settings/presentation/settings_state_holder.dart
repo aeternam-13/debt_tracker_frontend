@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:debttracker/settings/domain/model/custom_theme_mode.dart';
 import 'package:debttracker/settings/domain/model/theme_config.dart';

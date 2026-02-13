@@ -34,25 +34,25 @@ class DebtTracker extends ConsumerWidget {
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
-      path: '/',
+      path: AppRoute.login.path,
       builder: (BuildContext context, GoRouterState state) {
         return const LoginScreen();
       },
       routes: <RouteBase>[
         GoRoute(
-          path: '/debtorlist',
+          path: AppRoute.debtorList.path,
           builder: (BuildContext context, GoRouterState state) {
             return const DebtorListScreen();
           },
         ),
         GoRoute(
-          path: '/login',
+          path: AppRoute.login.path,
           builder: (BuildContext context, GoRouterState state) {
             return const LoginScreen();
           },
         ),
         GoRoute(
-          path: '/settings',
+          path: AppRoute.settings.path,
           builder: (BuildContext context, GoRouterState state) {
             return const SettingsScreen();
           },
@@ -61,3 +61,12 @@ final GoRouter _router = GoRouter(
     ),
   ],
 );
+
+enum AppRoute {
+  login('/'),
+  debtorList('/debtorlist'),
+  settings('/settings');
+
+  final String path;
+  const AppRoute(this.path);
+}

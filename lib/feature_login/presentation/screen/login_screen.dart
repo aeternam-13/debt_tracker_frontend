@@ -8,6 +8,7 @@ import 'package:debttracker/feature_login/presentation/login_ui_event.dart';
 import 'package:debttracker/feature_login/presentation/login_viewmodel.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/password_texfield.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/username_textfield.dart';
+import 'package:debttracker/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -26,6 +27,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   void initState() {
     super.initState();
+
+    //Debug purposes only
+    _username.text = ref.read(loginViewmodelProvider).username;
+    _password.text = ref.read(loginViewmodelProvider).password;
+
     ref.listenManual(loginViewmodelProvider, (previousState, newState) {
       _updateController(_username, newState.username);
       _updateController(_password, newState.password);
@@ -53,11 +59,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         next.whenData((event) {
           switch (event) {
             case NavigateToMainScreen():
-              throw UnimplementedError();
+              context.push(AppRoute.debtorList.path);
             case DisplayLoadingDialog():
               loadingDialog(context, "loading");
             case HideLoadingDialog() || NavigateBack():
-              Navigator.of(context).pop();
+              context.pop();
             case ShowErrorDialog():
               errorSnackBar(context, event.text);
           }

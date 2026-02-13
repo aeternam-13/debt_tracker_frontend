@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:debttracker/core/domain/services/api_service.dart';
 import 'package:debttracker/feature_login/data/data_source/login_dao.dart';
@@ -17,9 +18,9 @@ class LoginDaoImpl extends LoginDao {
   Future<Result<AuthResponse, LoginException>> login(UserInfo userInfo) async {
     try {
       final response = await _apiService.post(_baseUrl, body: userInfo.toMap());
-
+      log(response.statusCode.toString());
       switch (response.statusCode) {
-        case HttpStatus.created:
+        case HttpStatus.ok:
           final authResponse = AuthResponseMapper.fromJson(response.body);
 
           _apiService.setToken(authResponse.token);
