@@ -61,7 +61,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             case NavigateToMainScreen():
               context.push(AppRoute.debtorList.path);
             case DisplayLoadingDialog():
-              loadingDialog(context, "loading");
+              loadingDialog(context, text: "Login you in");
             case HideLoadingDialog() || NavigateBack():
               context.pop();
             case ShowErrorDialog():

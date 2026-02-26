@@ -37,6 +37,8 @@ class TransactionMapper extends ClassMapperBase<Transaction> {
   static const Field<Transaction, String> _f$comments = Field(
     'comments',
     _$comments,
+    opt: true,
+    def: "",
   );
 
   @override
