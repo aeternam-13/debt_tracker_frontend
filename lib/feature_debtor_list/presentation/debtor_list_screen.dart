@@ -1,5 +1,5 @@
-import 'package:debttracker/feature_track_debt/debtor_list/presentation/debtor_list_state.dart';
-import 'package:debttracker/feature_track_debt/debtor_list/presentation/debtor_list_viewmodel.dart';
+import 'package:debttracker/feature_debtor_list/presentation/debtor_list_state.dart';
+import 'package:debttracker/feature_debtor_list/presentation/debtor_list_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

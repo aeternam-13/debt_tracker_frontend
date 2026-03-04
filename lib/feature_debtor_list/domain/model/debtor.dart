@@ -1,4 +1,4 @@
-import 'package:debttracker/feature_track_debt/domain/model/transaction.dart';
+import 'package:debttracker/feature_debtor_list/domain/model/transaction.dart';
 
 final class Debtor {
   final String id;

@@ -1,6 +1,6 @@
 import 'package:debttracker/commons/safe_scope.dart';
-import 'package:debttracker/feature_track_debt/domain/model/debtor.dart';
-import 'package:debttracker/feature_track_debt/dummy_list.dart';
+import 'package:debttracker/feature_debtor_list/domain/model/debtor.dart';
+import 'package:debttracker/feature_debtor_list/dummy_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,6 +9,8 @@ class DebtorListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+
     return SafeScope(
       floatingButton: FloatingActionButton(
         onPressed: () {},
@@ -18,11 +20,27 @@ class DebtorListScreen extends ConsumerWidget {
           color: Colors.white,
         ),
       ),
-      appBar: AppBar(
-        title: const Text("Debtors"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: <Widget>[
+          SliverAppBar(
+            stretch: true,
+            leading: Icon(Icons.logout_outlined),
+
+            pinned: true,
+            forceElevated: true,
+            stretchTriggerOffset: 100.0,
+            expandedHeight: 250.0,
+            backgroundColor: theme.primaryColor,
+            surfaceTintColor: Colors.transparent,
+            flexibleSpace: const FlexibleSpaceBar(
+              title: Text('SliverAppBar'),
+              background: FlutterLogo(),
+            ),
+          ),
+          DebtorList(debtors: debtorsDummy),
+        ],
       ),
-      child: DebtorList(debtors: debtorsDummy),
     );
   }
 }
@@ -32,7 +50,7 @@ class DebtorList extends StatelessWidget {
   final List<Debtor> debtors;
 
   @override
-  Widget build(BuildContext context) => ListView.builder(
+  Widget build(BuildContext context) => SliverList.builder(
     itemCount: debtors.length,
     itemBuilder: (context, index) {
       return DebtorCard(debtor: debtors[index]);

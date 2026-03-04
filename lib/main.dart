@@ -1,5 +1,7 @@
+import 'dart:ui';
+
 import 'package:debttracker/feature_login/presentation/screen/login_screen.dart';
-import 'package:debttracker/feature_track_debt/debtor_list/debtor_list.dart';
+import 'package:debttracker/feature_debtor_list/debtor_list.dart';
 import 'package:debttracker/settings/domain/model/theme_config.dart';
 import 'package:debttracker/settings/presentation/settings_screen.dart';
 import 'package:debttracker/settings/presentation/settings_viewmodel.dart';
@@ -22,6 +24,9 @@ class DebtTracker extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'Flutter Demo',
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch},
+      ),
       theme: themeConfig.theme,
       darkTheme: themeConfig.darkTheme,
       highContrastDarkTheme: themeConfig.highContrastDarkTheme,
