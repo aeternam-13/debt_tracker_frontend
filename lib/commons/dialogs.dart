@@ -5,7 +5,6 @@ void loadingDialog(
   BuildContext context, {
   String text = "Loading, please wait",
 }) async {
-  final theme = Theme.of(context);
   await showDialog<String>(
     barrierDismissible: false,
     context: context,
@@ -14,30 +13,26 @@ void loadingDialog(
       return PopScope(
         canPop: false,
         child: AlertDialog(
-          title: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 22),
-                  child: Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: theme.colorScheme.primary,
-                      fontWeight: .w800,
-                    ),
-                  ),
+          title: Column(
+            mainAxisAlignment: .center,
+            crossAxisAlignment: .stretch,
+            spacing: 32,
+            children: [
+              Text(
+                text,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: theme.colorScheme.primary,
+                  fontWeight: .w800,
                 ),
-                SpinKitWave(
-                  color: theme.colorScheme.inversePrimary,
-                  size: 50,
-                  itemCount: 8,
-                  duration: Duration(milliseconds: 1400),
-                ),
-              ],
-            ),
+              ),
+              SpinKitRipple(
+                color: theme.colorScheme.primary,
+                size: 60,
+                duration: Duration(milliseconds: 1400),
+              ),
+            ],
           ),
         ),
       );
