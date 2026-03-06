@@ -21,9 +21,11 @@ class _PasswordTexfieldState extends State<PasswordTexfield> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return TextFormField(
       controller: widget.controller,
       obscureText: _hidePassword,
+
       onChanged: widget.onValueChange,
       decoration: InputDecoration(
         label: Container(
@@ -31,11 +33,17 @@ class _PasswordTexfieldState extends State<PasswordTexfield> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
           padding: const EdgeInsets.only(left: 3, right: 3, top: 4),
-          child: const Text('Password'),
+          child: Text(
+            'Password',
+            style: theme.textTheme.bodyLarge!.copyWith(
+              fontWeight: .w700,
+              color: theme.colorScheme.primary,
+            ),
+          ),
         ),
         suffix: IconButton(
           onPressed: _togglePasswordVisibility,
-          color: Theme.of(context).colorScheme.primary,
+          color: _hidePassword ? null : theme.colorScheme.primary,
           icon: Icon(_hidePassword ? Icons.visibility : Icons.visibility_off),
         ),
         border: const OutlineInputBorder(),

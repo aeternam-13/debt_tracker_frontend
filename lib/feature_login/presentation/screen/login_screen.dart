@@ -2,13 +2,13 @@ import 'package:debttracker/commons/button_theme.dart';
 import 'package:debttracker/commons/dialogs.dart';
 import 'package:debttracker/commons/safe_scope.dart';
 import 'package:debttracker/commons/snack_bars.dart';
+import 'package:debttracker/destinations/app_routes.dart';
 import 'package:debttracker/feature_login/di/login_providers.dart';
 import 'package:debttracker/feature_login/presentation/login_intent.dart';
 import 'package:debttracker/feature_login/presentation/login_ui_event.dart';
 import 'package:debttracker/feature_login/presentation/login_viewmodel.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/password_texfield.dart';
 import 'package:debttracker/feature_login/presentation/screen/components/username_textfield.dart';
-import 'package:debttracker/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -59,7 +59,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         next.whenData((event) {
           switch (event) {
             case NavigateToMainScreen():
-              context.push(AppRoute.debtorList.path);
+              context.push(AppRoutes.debtorList.path);
             case DisplayLoadingDialog():
               loadingDialog(context, text: "Login you in");
             case HideLoadingDialog() || NavigateBack():
@@ -132,6 +132,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 style: primarySuperLargeButton(theme),
                                 child: Text("Login"),
                               ),
+                              Row(
+                                mainAxisAlignment: .spaceBetween,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text("Forgot password?"),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text("Create account"),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -142,13 +155,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .spaceBetween,
+              spacing: 8,
               children: [
-                Text("Version 0.0.1", style: theme.textTheme.labelSmall),
-                ElevatedButton(
+                TextButton(
                   onPressed: () => context.push("/settings"),
                   child: Text("Settings"),
                 ),
+
+                Text("Version 0.0.1", style: theme.textTheme.labelSmall),
               ],
             ),
           ],

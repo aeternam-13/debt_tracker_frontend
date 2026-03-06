@@ -20,7 +20,13 @@ class UsernameTextfield extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
           padding: const EdgeInsets.only(left: 3, right: 3, top: 4),
-          child: const Text('Username'),
+          child: Text(
+            'Username',
+            style: theme.textTheme.bodyLarge!.copyWith(
+              fontWeight: .w700,
+              color: theme.colorScheme.primary,
+            ),
+          ),
         ),
         suffix: IconButton(onPressed: () {}, icon: Icon(Icons.person)),
         border: const OutlineInputBorder(),

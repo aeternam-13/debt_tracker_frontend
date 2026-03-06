@@ -1,8 +1,10 @@
 import 'package:debttracker/commons/safe_scope.dart';
+import 'package:debttracker/destinations/app_routes.dart';
 import 'package:debttracker/feature_debtor_list/domain/model/debtor.dart';
 import 'package:debttracker/feature_debtor_list/dummy_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class DebtorListScreen extends ConsumerWidget {
   const DebtorListScreen({super.key});
@@ -13,7 +15,7 @@ class DebtorListScreen extends ConsumerWidget {
 
     return SafeScope(
       floatingButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => context.go(AppRoutes.addDebtor.path),
         child: Icon(
           Icons.person_add_alt_outlined,
           size: 34,
@@ -26,16 +28,28 @@ class DebtorListScreen extends ConsumerWidget {
           SliverAppBar(
             stretch: true,
             leading: Icon(Icons.logout_outlined),
-
             pinned: true,
             forceElevated: true,
             stretchTriggerOffset: 100.0,
-            expandedHeight: 250.0,
-            backgroundColor: theme.primaryColor,
+            expandedHeight: 150.0,
+            backgroundColor: theme.colorScheme.inversePrimary,
             surfaceTintColor: Colors.transparent,
-            flexibleSpace: const FlexibleSpaceBar(
-              title: Text('SliverAppBar'),
+            flexibleSpace: FlexibleSpaceBar(
               background: FlutterLogo(),
+              title: Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    Text('Debtors'),
+                    Icon(
+                      Icons.attach_money_outlined,
+                      size: 32,
+                      color: Colors.green,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
           DebtorList(debtors: debtorsDummy),

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:debttracker/destinations/app_routes.dart';
+import 'package:debttracker/feature_add_debtor/presentation/screens/add_debtor_screen.dart';
 import 'package:debttracker/feature_login/presentation/screen/login_screen.dart';
 import 'package:debttracker/feature_debtor_list/debtor_list.dart';
 import 'package:debttracker/settings/domain/model/theme_config.dart';
@@ -31,6 +33,7 @@ class DebtTracker extends ConsumerWidget {
       darkTheme: themeConfig.darkTheme,
       highContrastDarkTheme: themeConfig.highContrastDarkTheme,
       highContrastTheme: themeConfig.highContrastTheme,
+      debugShowCheckedModeBanner: false,
       routerConfig: _router,
     );
   }
@@ -39,39 +42,35 @@ class DebtTracker extends ConsumerWidget {
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
-      path: AppRoute.login.path,
+      path: AppRoutes.login.path,
       builder: (BuildContext context, GoRouterState state) {
         return const LoginScreen();
       },
       routes: <RouteBase>[
         GoRoute(
-          path: AppRoute.debtorList.path,
+          path: AppRoutes.debtorList.path,
           builder: (BuildContext context, GoRouterState state) {
             return const DebtorListScreen();
           },
         ),
         GoRoute(
-          path: AppRoute.login.path,
+          path: AppRoutes.login.path,
           builder: (BuildContext context, GoRouterState state) {
             return const LoginScreen();
           },
         ),
         GoRoute(
-          path: AppRoute.settings.path,
+          path: AppRoutes.settings.path,
           builder: (BuildContext context, GoRouterState state) {
             return const SettingsScreen();
           },
+        ),
+        GoRoute(
+          path: AppRoutes.addDebtor.path,
+          builder: (BuildContext context, GoRouterState state) =>
+              const AddDebtorScreen(),
         ),
       ],
     ),
   ],
 );
-
-enum AppRoute {
-  login('/'),
-  debtorList('/debtorlist'),
-  settings('/settings');
-
-  final String path;
-  const AppRoute(this.path);
-}
